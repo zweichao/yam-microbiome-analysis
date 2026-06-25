@@ -1,0 +1,27 @@
+改名命令
+
+#细菌改名
+for f in *.fastq; do
+    new=$(echo "$f" | sed -E 's/^([A-Z]{1,3}[0-9])_([0-9])\.799F_1193R\.R([12])\.raw\.fastq$/\1\2_16S_R\3.fastq/')
+    [ "$f" != "$new" ] && mv "$f" "$new"
+done
+
+
+
+
+#真菌改名：
+for f in *.fastq; do
+    new=$(echo "$f" | sed -E 's/^([A-Z]{1,3}[0-9])_([0-9])\.ITS1F_ITS2R\.R([12])\.raw\.fastq$/\1\2_ITS_R\3.fastq/')
+    [ "$f" != "$new" ] && mv "$f" "$new"
+done
+
+
+
+解压命令
+
+
+# 遍历所有 .gz 文件，批量解压并保留原文件
+for file in *.gz; do
+  # 跳过空文件（若文件夹中无 .gz 文件时避免报错）
+  [ -f "$file" ] && gunzip -k "$file"
+done
